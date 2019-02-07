@@ -1,0 +1,91 @@
+*{
+	padding:0;
+	margin:0;
+}
+body,html{
+	min-height:100%;
+	height:100%;
+}
+body, input{
+	font-size:18pt;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:400;
+}
+.chat{
+	height:100%;
+	position:relative;
+	z-index:4;
+}
+.chat h2{
+	padding:1.2em;
+	font-size:1em;
+	text-transform:uppercase;
+	font-weight:700;
+	text-align:center;
+	background:white;
+	position:relative; z-index:2;
+}
+.chat .discussionwrap{
+	position:absolute; z-index:1;
+	right:0; left:0;
+	top:2.4em;
+	overflow-y:auto;
+	bottom:2em;
+}
+@media only screen and (max-width: 600px) {
+	body, input{
+		font-size:15pt;
+	}
+	.chat h2{
+		padding:0.4em;
+	}
+	.chat .discussionwrap{
+		top:2em;
+	}
+}
+.chat .underdiscussion{
+	position:absolute;
+	bottom:0;left:0em;right:0;
+	height:2em;
+}
+.chat .discussion{
+	list-style:none;
+	position:relative;
+	padding-left:0.5em; padding-right:0.25em;
+}
+.chat .underdiscussion input{
+	border:0;
+	padding-left:0.5em; padding-right:2.25em;
+	width:100%;
+	height:100%;
+	box-sizing:border-box;
+	white-space: nowrap;
+	line-height:100%;
+	transition:background 0.2s;
+}
+.chat .underdiscussion input:focus{
+	outline:0;
+	background:#f0f7fd;
+}
+.chat .nick{
+	padding-right: 0.5em;
+	font-weight: 700;
+	font-size: 0.8em;
+}
+.chat .nick:after{
+	content:":";
+}
+.chat h2{
+	border-bottom:1px solid #e2e2e2;
+}
+.chat .underdiscussion{
+	border-top:1px solid #e2e2e2;
+}
+.chat .sender{
+	content:" ";
+	position:absolute; right:0.2em; bottom:0.2em;
+	cursor:pointer;
+	width:1.6em;height:1.6em;
+	background:url('send.png') center center no-repeat;
+	background-size:contain;
+}
