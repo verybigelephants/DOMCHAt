@@ -69,7 +69,9 @@ function chatSend(message, nickname){
 			data: {'function':'send', 'message':message, 'meta':chat_meta},
 			dataType: "json",
 			success: function(data){
-				chatUpdate(true, true);
+				if(!now_updating){
+					chatUpdate(true, true);
+				}
 				$('#chatsender').val("");
 			},
 			error: function(){
