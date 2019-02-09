@@ -5,7 +5,11 @@ var state = null;
 var beepsound=null;
 var skipped_beep_times=0;
 
+var max_messages=null;
+
 $(function(){
+	max_messages = Number($("#chatarea").attr('data-frontend-maxmessages'));
+	
 	chatInteraction();
 	
 	chatUpdate(false, true);
@@ -96,6 +100,17 @@ function chatUpdate(forceUpdate, forceScrollDown) {
 					
 					for (var i = 0; i < data.text.length; i++) {
 						$('#chatarea').append($(data.text[i]));
+					}
+					
+					if(max_messages !== null){
+						var messages = $("#chatarea li");
+						var i=1;
+						messages.each(function(){
+							if(i < messages.length-max_messages){
+								$(this).remove();
+							} 
+							i++;
+						});
 					}
 					
 					var scroll_condition = (current > max-50);

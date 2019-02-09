@@ -5,6 +5,8 @@
 	$nick_maxlength = 40;
 	global $maxlength;
 		$maxlength = 500;
+	global $cutmessages;
+		$cutmessages = 300;
 	
 	if($function!==null){
 		$log = array();
@@ -30,14 +32,22 @@
 				}else{
 					$text= array();
 					$log['state'] = implode(",", array($count,$fsize));
-					foreach ($lines as $line_num => $line){
-						if($line_num >= $state_lines){
-							$text[] =  $line = str_replace("\n", "", $line);
+					if($state_lines==0){
+						foreach ($lines as $line_num => $line){
+							if($line_num >= ($count-$cutmessages-1) ){
+								$text[] =  $line = str_replace("\n", "", $line);	
+							}
+						}
+					}else{
+						foreach ($lines as $line_num => $line){
+							if($line_num >= $state_lines){
+								$text[] =  $line = str_replace("\n", "", $line);
+							}
 						}
 					}
 					$log['text'] = $text; 
 				}
-				  
+				
 				break;
 			 
 			case('send'):

@@ -48,7 +48,7 @@
 	<div class="chat">
 		<h2>Chat</h2>
 		<div class="discussionwrap" id="chatwrap">
-			<ul class="discussion" id="chatarea">
+			<ul class="discussion" id="chatarea" data-frontend-maxmessages="<?php require_once('chat.php'); global $cutmessages; echo($cutmessages); ?>" >
 			</ul>
 		</div>
 		<div class="underdiscussion">
