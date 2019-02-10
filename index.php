@@ -46,7 +46,10 @@
 </head>
 <body>
 	<div class="chat">
-		<h2>Chat</h2>
+		<h2>
+			<span id="chat_name_actual">Chat</span>
+			<input type="text" id="chat_name_changer" /> <input type="submit" value="Change" data-nick-maxlength="<?php require_once('chat.php'); global $nick_maxlength; echo($nick_maxlength); ?>" id="chat_name_changer_confirm" />
+		</h2>
 		<div class="discussionwrap" id="chatwrap">
 			<ul class="discussion" id="chatarea" data-frontend-maxmessages="<?php require_once('chat.php'); global $cutmessages; echo($cutmessages); ?>" >
 			</ul>

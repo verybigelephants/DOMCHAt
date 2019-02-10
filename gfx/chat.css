@@ -89,3 +89,9 @@ body, input{
 	background:url('send.png') center center no-repeat;
 	background-size:contain;
 }
+#chat_name_actual{
+	cursor: text;
+}
+#chat_name_changer, #chat_name_changer_confirm{
+	display:none;
+}

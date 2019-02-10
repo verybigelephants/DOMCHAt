@@ -10,6 +10,12 @@ var max_messages=null;
 $(function(){
 	max_messages = Number($("#chatarea").attr('data-frontend-maxmessages'));
 	
+	if(chat_meta.nickname<1){
+		$("#chat_name_actual").text("[no name]");
+	}else{
+		$("#chat_name_actual").text(chat_meta.nickname);
+	}
+	
 	chatInteraction();
 	
 	chatUpdate(false, true);
@@ -42,6 +48,45 @@ function chatInteraction(){
 	$("#alternativesender").click(function(){
 		sendProcessor();
 	});
+	
+	$("#chat_name_actual").click(function(){
+		$("#chat_name_actual").hide();
+		$("#chat_name_changer_confirm").show();
+		$("#chat_name_changer").val(chat_meta.nickname);
+		$("#chat_name_changer").show().focus().select();
+	});
+	$('#chat_name_changer').keyup(function(e) {
+		if (e.keyCode == 13) {
+			changeName();
+		}
+	});
+	$('#chat_name_changer_confirm').click(changeName);
+}
+function changeName(){
+	var max_length = Number($("#chat_name_changer_confirm").attr('data-nick-maxlength'));
+	chat_meta.nickname = $("#chat_name_changer").val();
+	if(chat_meta.nickname.length > max_length){
+		chat_meta.nickname = chat_meta.nickname.substring(0, max_length);
+	}
+	
+	if($.trim(chat_meta.nickname)<1){
+		$("#chat_name_actual").text("[no name]");
+	}else{
+		$("#chat_name_actual").text(chat_meta.nickname);
+	}
+	
+	$.ajax({
+		type: "POST",
+		url: "chat.php",
+		data: {'function':'updatenick', 'nickname':chat_meta.nickname},
+		dataType: "json"
+	});
+	
+	$("#chat_name_actual").show();
+	$("#chat_name_changer_confirm").hide();
+	$("#chat_name_changer").hide();
+	
+	$("#chatsender").focus();
 }
 
 function sendProcessor(){	

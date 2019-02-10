@@ -2,7 +2,8 @@
 	$function = isset($_POST['function']) ? $_POST['function'] : null;
 	$db = 'db/chat.db';
 	
-	$nick_maxlength = 40;
+	global $nick_maxlength;
+		$nick_maxlength = 25;
 	global $maxlength;
 		$maxlength = 500;
 	global $cutmessages;
@@ -70,6 +71,10 @@
 					
 					fwrite(fopen($db, 'a'), "<li><span data-time='".date('Y-m-d H:i:s')."' class='nick'>".$nickname."</span><span class='message'>".$message=str_replace("\n", " ", $message)."</span></li>\n"); 
 				}
+				break;
+			case('updatenick'):
+				session_start();
+				$_SESSION["nick"] = trim(htmlentities(strip_tags($_POST['nickname']), ENT_COMPAT, 'UTF-8'));
 				break;
 			
 		}
